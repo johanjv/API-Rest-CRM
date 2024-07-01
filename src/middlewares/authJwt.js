@@ -29,7 +29,6 @@ export const isModerator = async (req, res, next) => {
     const roles = await Role.find({_id: {$in: user.roles}})
 
     for (let i = 0; i < roles.length; i++) {
-        console.log("DDD: ", roles[i].name);
         if (roles[i].name === 'moderator') {
             next();
             return;

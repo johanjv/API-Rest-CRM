@@ -5,14 +5,15 @@ import morgan from "morgan";
 import helmet from "helmet";
 import cors from "cors"
 import dotenv from "dotenv/config";
-import { createRoles } from "./libs/initialSetup.js";
+import { createRoles, createStages } from "./libs/initialSetup.js";
 
-import productsRoutes from "./routes/products.routes.js"
+import prospectsRoutes from "./routes/prospects.routes.js"
 import authRoutes from "./routes/auth.routes.js"
 
 
 const app = express();
 createRoles();
+createStages();
 app.use(cors());
 app.use(morgan("dev"));
 app.use(helmet());
@@ -33,7 +34,7 @@ io.on('connection', (socket) => {
   socket.emit('message', '¡Conexión establecida con el servidor de Socket.IO!');
 });
 
-app.use('/api/products', productsRoutes);
+app.use('/api/prospects', prospectsRoutes);
 app.use('/api/auth', authRoutes);
 
 export default server;
